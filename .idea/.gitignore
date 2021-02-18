@@ -1,0 +1,8 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Datasource local storage ignored files
+/../../../../../../../:\Documents\PUC Minas\Laboratório de Desenvolvimento de Aplicações Móveis e Distribuidas\Repositorios\chat-multicast-java-Guicbdiniz\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

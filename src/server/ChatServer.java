@@ -1,9 +1,14 @@
-package network;
+package server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Singleton class to create a local TCP server.
+ * <p>
+ * Its only responsibility is to wait for new client connections and create a runnable Connection instance.
+ */
 public class ChatServer {
 
     private static ChatServer serverInstance = null;
@@ -28,15 +33,18 @@ public class ChatServer {
         return serverInstance;
     }
 
-    public void listenToClient() throws IOException {
-        Socket clientSocket = serverSocket.accept();
-        new Connection(clientSocket);
-    }
-
     /**
      * Get chat server port.
      */
     public static int getServerPort() {
         return SERVER_PORT;
+    }
+
+    /**
+     * Listen for a new TCP connection to the server, passing it to a ConnectionsManager.
+     */
+    public void listenToClient() throws IOException {
+        Socket clientSocket = serverSocket.accept();
+        new Connection(clientSocket);
     }
 }
