@@ -9,15 +9,17 @@ Aplicação de console para criação de chats usando Multicast.
 
 - ClientApp: classe de entrada para a aplicação cliente que simplesmente checa por comandos no stdIn e os manda para a
   classe TCPClient.
-- ServerApp: classe de entrada para a aplicação servidor que
-- TCPClient:
-- ClientListenThread:
-- ChatMember:
-- ChatRoom:
-- MulticastListenThread:
-- ChatRoomsManager:
-- ChatServer:
-- Connection:
+- ServerApp: classe de entrada para a aplicação servidor que simplesmente pega a instância da ChatServer e faz um loop
+  infinito esperando por novos clientes.
+- TCPClient: cria a conexão TCP do cliente, conectando com o servidor e criar uma nova instância da ClientListenThread,
+  que vai ler as respostas do servidor.
+- ClientListenThread: simplesmente concatena as mensagens do servidor no stdOut do cliente.
+- ChatMember: instância do membro de uma sala de chat.
+- ChatRoom: instância de uma sala de chat.
+- MulticastListenThread: thread de escuta de um membro por novas mensagens que chegarem em determinada sala.
+- ChatRoomsManager: singleton de gerência das salas criadas (mantendo-as em uma lista encadeada).
+- ChatServer: singleton do servidor TCP que simplesmente cria novas Connections para cada cliente.
+- Connection: thread com toda a lógica de ouvir o cliente TCP e agir de acordo com os comandos que chegam.
 
 ## Protocolo Utilizado
 
