@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,9 +21,11 @@ public class ChatRoom {
         this.host = InetAddress.getByName(host);
         this.chatName = chatName;
         this.members = new ArrayList<>();
-        this.sendLocalPort = ChatMember.useNextLocalPort();
+//        this.sendLocalPort = ChatMember.useNextLocalPort();
+        this.sendLocalPort = 6789;
         this.multicastSocket = new MulticastSocket(this.sendLocalPort);
         multicastSocket.joinGroup(this.host);
+        System.out.println("Room created host: " + host);
     }
 
     /**

@@ -22,6 +22,7 @@ public class MulticastListenThread extends Thread {
         DatagramPacket message;
         try {
             do {
+                System.out.println("Receiving message!");
                 message = new DatagramPacket(buffer, buffer.length);
                 multicastSocket.receive(message);
                 out.writeUTF(new String(message.getData()).trim());

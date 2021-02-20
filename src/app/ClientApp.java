@@ -14,8 +14,7 @@ public class ClientApp {
             client = new TCPClient("127.0.0.1");
             while (true) {
                 clientCommand = clientIn.nextLine();
-                String returned = client.interactWithServer(clientCommand.strip());
-                System.out.println("Returned: " + returned);
+                client.interactWithServer(clientCommand.strip());
             }
 
         } catch (IOException e) {

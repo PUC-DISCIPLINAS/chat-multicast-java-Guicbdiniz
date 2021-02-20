@@ -54,7 +54,8 @@ public class Connection extends Thread {
         }
 
         String userName = messageWords[1];
-        out.writeUTF("You are now connected!\n");
+        System.out.println("New user connected! " + userName);
+        out.writeUTF("You are now connected!");
 
         boolean shouldExitLoop = false;
         while (!shouldExitLoop) {
@@ -110,6 +111,7 @@ public class Connection extends Thread {
     private void createChatRoom(String chatRoomName) throws IOException {
         String chatRoomID = chatRoomsManager.getNextMulticastIP();
         chatRoomsManager.createRoom(chatRoomID, chatRoomName);
+        System.out.println("New room was created! " + chatRoomName);
         out.writeUTF("Room created with name " + chatRoomName);
     }
 
@@ -120,7 +122,8 @@ public class Connection extends Thread {
             return;
         }
         selectedRoom.addMember(clientName, out);
-        out.writeUTF("You are now connected to the room " + chatRoomName + "\n");
+        System.out.println("Client " + clientName + " was connected to " + chatRoomName);
+        out.writeUTF("You are now connected to the room " + chatRoomName);
     }
 
     private void sendMessageToChatRoom(String clientName, String chatRoomName, String[] messageWords) throws IOException {
@@ -143,10 +146,14 @@ public class Connection extends Thread {
      */
     private ChatRoom getChatRoomFromName(String chatRoomName) {
         List<ChatRoom> chatRooms = chatRoomsManager.listRooms();
-        ChatRoom selectedRoom;
-        selectedRoom = chatRooms.stream()
-                .filter(chatRoom -> chatRoom.getChatName().equalsIgnoreCase(chatRoomName))
-                .collect(Collectors.toList()).get(0);
+        ChatRoom selectedRoom = null;
+        try {
+            selectedRoom = chatRooms.stream()
+                    .filter(chatRoom -> chatRoom.getChatName().equalsIgnoreCase(chatRoomName))
+                    .collect(Collectors.toList()).get(0);
+        } catch (IndexOutOfBoundsException ignore) {
+
+        }
         return selectedRoom;
     }
 
@@ -156,6 +163,7 @@ public class Connection extends Thread {
                 .filter(chatRoom -> chatRoom.getChatName().equals(chatRoomName))
                 .forEach(chatRoom -> chatRoom.removeMember(clientName));
 
+        System.out.println("Client " + clientName + " left " + chatRoomName);
         out.writeUTF("You have left the room " + chatRoomName + "\n");
     }
 
