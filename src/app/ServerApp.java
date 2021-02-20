@@ -9,7 +9,7 @@ public class ServerApp {
         System.out.println("Starting server");
         try {
             ChatServer chatServer = ChatServer.getInstance();
-            for (int i = 0; i < 5; i++) {
+            while (true) {
                 chatServer.listenToClient();
             }
         } catch (IOException e) {
