@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 public class ChatRoomsManager {
 
     private static ChatRoomsManager managerInstance;
-    private List<ChatRoom> chatRooms;
+    private final List<ChatRoom> chatRooms;
     private int nextMulticastIPIndex = 0;
-    private String[] possibleMulticastIPs = new String[]{
+    private final String[] possibleMulticastIPs = new String[]{
             "228.5.6.7", "228.5.6.8", "228.5.6.9", "228.5.7.1", "228.5.7.2", "228.5.7.3", "228.5.7.4", "228.5.7.5",
             "228.5.7.6", "228.5.7.7", "228.5.7.8", "228.5.7.9", "228.5.8.1", "228.6.6.7", "228.7.6.7", "229.5.6.7",
             "229.8.6.7", "229.5.6.1", "229.5.6.2", "229.5.6.3"

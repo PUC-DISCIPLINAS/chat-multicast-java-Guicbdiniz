@@ -15,7 +15,7 @@ public class ChatMember {
         this.memberName = memberName;
         this.outputStream = outputStream;
         this.multicastListenThread = new MulticastListenThread(outputStream, nextLocalPort, host);
-        nextLocalPort++;
+//        nextLocalPort++;
     }
 
     public String getMemberName() {
